@@ -27,8 +27,9 @@ public class Application {
         System.out.println(itemService.delete(cap.getId()));
 
         System.out.println(itemService.getAll());
-        Item jeans2 = new Item("jeans", 22.00, 20);
-        itemService.update(jeans2);
+        jeans.setPrice(70.50);
+        jeans.setName("new jeans");
+        itemService.update(jeans);
         System.out.println(itemService.getAll());
     }
 }

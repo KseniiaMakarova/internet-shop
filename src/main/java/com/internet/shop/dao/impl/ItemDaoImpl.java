@@ -1,17 +1,18 @@
 package com.internet.shop.dao.impl;
 
 import com.internet.shop.dao.ItemDao;
-import com.internet.shop.dao.Storage;
+import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Item;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Dao
 public class ItemDaoImpl implements ItemDao {
     @Override
     public Item create(Item item) {
-        Storage.items.add(item);
+        Storage.addToList(item);
         return item;
     }
 
@@ -29,11 +30,10 @@ public class ItemDaoImpl implements ItemDao {
 
     @Override
     public Item update(Item item) {
-        if (Storage.items.contains(item)) {
-            Storage.items.set(Storage.items.indexOf(item), item);
-        } else {
-            create(item);
-        }
+        IntStream.range(0, Storage.items.size())
+                .filter(ind -> Storage.items.get(ind).getId().equals(item.getId()))
+                .findFirst()
+                .ifPresent(ind -> Storage.items.set(ind, item));
         return item;
     }
 
