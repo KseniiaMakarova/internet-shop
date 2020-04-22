@@ -32,8 +32,7 @@ public class ItemDaoImpl implements ItemDao {
     public Item update(Item item) {
         IntStream.range(0, Storage.items.size())
                 .filter(ind -> Storage.items.get(ind).getId().equals(item.getId()))
-                .findFirst()
-                .ifPresent(ind -> Storage.items.set(ind, item));
+                .forEach(ind -> Storage.items.set(ind, item));
         return item;
     }
 
