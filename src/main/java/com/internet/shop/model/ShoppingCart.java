@@ -3,22 +3,22 @@ package com.internet.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Bucket {
-    private List<Item> items;
+public class ShoppingCart {
+    private List<Product> products;
     private Long id;
     private User user;
 
-    public Bucket(User user) {
-        items = new ArrayList<>();
+    public ShoppingCart(User user) {
+        products = new ArrayList<>();
         this.user = user;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {

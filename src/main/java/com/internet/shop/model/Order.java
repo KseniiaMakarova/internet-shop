@@ -4,21 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    private List<Item> items;
+    private List<Product> products;
     private Long id;
     private User user;
 
     public Order(User user) {
-        items = new ArrayList<>();
+        products = new ArrayList<>();
         this.user = user;
     }
 
-    public List<Item> getItems() {
-        return items;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setItems(List<Item> items) {
-        this.items = items;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     public Long getId() {

@@ -1,11 +1,11 @@
 package com.internet.shop.model;
 
-public class Item {
+public class Product {
     private Long id;
     private String name;
     private double price;
 
-    public Item(String name, double price) {
+    public Product(String name, double price) {
         this.name = name;
         this.price = price;
     }
@@ -36,7 +36,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" + "id=" + id
+        return "Product{" + "id=" + id
                 + ", name='" + name + '\''
                 + ", price=" + price + '}';
     }
