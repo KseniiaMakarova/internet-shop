@@ -10,8 +10,6 @@ public interface ItemService {
 
     List<Item> getAll();
 
-    List<Item> getAllAvailable();
-
     Item update(Item item);
 
     boolean delete(Long id);

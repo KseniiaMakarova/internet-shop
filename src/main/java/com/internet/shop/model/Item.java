@@ -4,12 +4,10 @@ public class Item {
     private Long id;
     private String name;
     private double price;
-    private int count;
 
-    public Item(String name, double price, int count) {
+    public Item(String name, double price) {
         this.name = name;
         this.price = price;
-        this.count = count;
     }
 
     public Long getId() {
@@ -36,19 +34,10 @@ public class Item {
         this.price = price;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     @Override
     public String toString() {
         return "Item{" + "id=" + id
                 + ", name='" + name + '\''
-                + ", price=" + price
-                + ", count=" + count + '}';
+                + ", price=" + price + '}';
     }
 }
