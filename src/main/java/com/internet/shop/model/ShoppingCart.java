@@ -2,11 +2,12 @@ package com.internet.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShoppingCart {
-    private List<Product> products;
     private Long id;
     private User user;
+    private List<Product> products;
 
     public ShoppingCart(User user) {
         products = new ArrayList<>();
@@ -35,5 +36,14 @@ public class ShoppingCart {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "ShoppingCart{" + "id=" + id
+                + ", user=" + user.getName()
+                + ", products=" + products.stream()
+                                    .map(Product::getName)
+                                    .collect(Collectors.toList()) + '}';
     }
 }
