@@ -6,19 +6,21 @@ import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ShoppingCartService;
+import com.internet.shop.service.UserService;
+
 import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
     @Inject
     private ShoppingCartDao shoppingCartDao;
+    @Inject
+    private UserService userService;
 
     @Override
     public ShoppingCart addProduct(ShoppingCart shoppingCart, Product product) {
         shoppingCart.getProducts().add(product);
-        shoppingCartDao.get(shoppingCart.getId())
-                .ifPresentOrElse(cart -> shoppingCartDao.update(cart),
-                        () -> shoppingCartDao.create(shoppingCart));
+        shoppingCartDao.update(shoppingCart);
         return shoppingCart;
     }
 
@@ -41,7 +43,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     public ShoppingCart getByUserId(Long userId) {
         return shoppingCartDao.getAll().stream()
                 .filter(shoppingCart -> shoppingCart.getUser().getId().equals(userId))
-                .findFirst().get();
+                .findFirst()
+                .orElseGet(() -> shoppingCartDao.create(
+                        new ShoppingCart(userService.get(userId))));
     }
 
     @Override

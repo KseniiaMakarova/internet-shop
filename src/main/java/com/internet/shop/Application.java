@@ -55,9 +55,7 @@ public class Application {
         userService.delete(peter.getId());
         System.out.println(userService.getAll());
 
-        ShoppingCart arthurCart = new ShoppingCart(arthur);
-        System.out.println(arthurCart);
-
+        ShoppingCart arthurCart = shoppingCartService.getByUserId(arthur.getId());
         shoppingCartService.addProduct(arthurCart, puppy);
         shoppingCartService.addProduct(arthurCart, flowers);
         shoppingCartService.addProduct(arthurCart, boots);
@@ -75,7 +73,7 @@ public class Application {
 
         userService.create(peter);
         productService.create(beer);
-        ShoppingCart peterCart = new ShoppingCart(peter);
+        ShoppingCart peterCart = shoppingCartService.getByUserId(peter.getId());
         shoppingCartService.addProduct(peterCart, beer);
         Order peterOrder = orderService.completeOrder(
                 shoppingCartService.getAllProducts(peterCart), peter);
