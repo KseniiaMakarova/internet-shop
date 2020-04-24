@@ -1,15 +1,15 @@
 package com.internet.shop.model;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Order {
-    private List<Product> products;
     private Long id;
     private User user;
+    private List<Product> products;
 
-    public Order(User user) {
-        products = new ArrayList<>();
+    public Order(List<Product> products, User user) {
+        this.products = products;
         this.user = user;
     }
 
@@ -35,5 +35,14 @@ public class Order {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id
+                + ", user=" + user.getName()
+                + ", products=" + products.stream()
+                                    .map(Product::getName)
+                                    .collect(Collectors.toList()) + '}';
     }
 }
