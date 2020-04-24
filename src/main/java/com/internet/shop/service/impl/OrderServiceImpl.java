@@ -24,8 +24,7 @@ public class OrderServiceImpl implements OrderService {
         List<Product> productsToOrder = new ArrayList<>(products);
         shoppingCartService.clear(shoppingCartService.getByUserId(user.getId()));
         Order newOrder = new Order(productsToOrder, user);
-        orderDao.create(newOrder);
-        return newOrder;
+        return orderDao.create(newOrder);
     }
 
     @Override
