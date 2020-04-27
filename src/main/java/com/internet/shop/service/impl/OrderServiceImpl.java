@@ -8,7 +8,6 @@ import com.internet.shop.model.Product;
 import com.internet.shop.model.User;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.ShoppingCartService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Product> products, User user) {
-        List<Product> productsToOrder = new ArrayList<>(products);
+        List<Product> productsToOrder = List.copyOf(products);
         shoppingCartService.clear(shoppingCartService.getByUserId(user.getId()));
         Order newOrder = new Order(productsToOrder, user);
         return orderDao.create(newOrder);
@@ -35,6 +34,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public Order create(Order order) {
+        return orderDao.create(order);
+    }
+
+    @Override
     public Order get(Long id) {
         return orderDao.get(id).get();
     }
@@ -42,6 +46,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getAll() {
         return orderDao.getAll();
+    }
+
+    @Override
+    public Order update(Order order) {
+        return orderDao.update(order);
     }
 
     @Override
