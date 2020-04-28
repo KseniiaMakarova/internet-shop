@@ -33,8 +33,7 @@ public class RegisterUserController extends HttpServlet {
         String repeatedPassword = req.getParameter("rep-psw");
         if (password.equals(repeatedPassword)) {
             User user = userService.create(new User(name, login, password));
-            ShoppingCart shoppingCart = shoppingCartService.getByUserId(user.getId());
-            shoppingCartService.create(shoppingCart);
+            shoppingCartService.create(new ShoppingCart(user));
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message", "Your repeated password was different. Try again.");
