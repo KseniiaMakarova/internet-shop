@@ -1,6 +1,7 @@
 package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
@@ -13,9 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 public class AddProductToCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
     private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private ShoppingCartService shoppingCartService =
+    private final ShoppingCartService shoppingCartService =
             (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    private ProductService productService =
+    private final ProductService productService =
             (ProductService) injector.getInstance(ProductService.class);
 
     @Override
@@ -23,7 +24,8 @@ public class AddProductToCartController extends HttpServlet {
             throws ServletException, IOException {
         String productId = req.getParameter("id");
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
-        shoppingCartService.addProduct(shoppingCart, productService.get(Long.valueOf(productId)));
+        Product product = productService.get(Long.valueOf(productId));
+        shoppingCartService.addProduct(shoppingCart, product);
         resp.sendRedirect(req.getContextPath() + "/products/all");
 
     }

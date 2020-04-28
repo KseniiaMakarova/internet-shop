@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CreateProductController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private ProductService productService =
+    private final ProductService productService =
             (ProductService) injector.getInstance(ProductService.class);
 
     @Override
@@ -26,6 +26,6 @@ public class CreateProductController extends HttpServlet {
         String name = req.getParameter("name");
         String price = req.getParameter("price");
         productService.create(new Product(name, Double.parseDouble(price)));
-        resp.sendRedirect(req.getContextPath() + "/");
+        req.getRequestDispatcher("/WEB-INF/views/products/new.jsp").forward(req, resp);
     }
 }

@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DeleteUserController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
-    private UserService userService = (UserService) injector.getInstance(UserService.class);
+    private final UserService userService =
+            (UserService) injector.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
