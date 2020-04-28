@@ -1,4 +1,4 @@
-package com.internet.shop.controllers;
+package com.internet.shop.controllers.cart;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AddProductToCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static final Injector injector = Injector.getInstance("com.internet.shop");
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final ShoppingCartService shoppingCartService =
-            (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
     private final ProductService productService =
-            (ProductService) injector.getInstance(ProductService.class);
+            (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
