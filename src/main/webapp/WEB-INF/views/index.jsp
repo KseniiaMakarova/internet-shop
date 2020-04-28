@@ -4,6 +4,13 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>Hello world!</h1>
+    <a href="${pageContext.request.contextPath}
+                                /users/register">REGISTER</a>
+    <a href="${pageContext.request.contextPath}
+                                /users/all">VIEW ALL USERS</a>
+    <a href="${pageContext.request.contextPath}
+                                /products/new">CREATE NEW PRODUCT</a>
+    <a href="${pageContext.request.contextPath}
+                                /products/all">VIEW ALL PRODUCTS</a>
 </body>
 </html>
