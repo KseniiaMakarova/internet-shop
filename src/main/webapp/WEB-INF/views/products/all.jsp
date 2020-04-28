@@ -26,7 +26,7 @@
                 </td>
                 <td>
                     <a href="${pageContext.request.contextPath}
-                                        /products/cart?id=${product.id}">ADD</a>
+                                        /products/add-to-cart?id=${product.id}">ADD</a>
                 </td>
             </tr>
         </c:forEach>
