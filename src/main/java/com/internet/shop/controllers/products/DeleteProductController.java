@@ -18,6 +18,6 @@ public class DeleteProductController extends HttpServlet {
             throws ServletException, IOException {
         productService.delete(Long.valueOf(req.getParameter("id")));
         req.setAttribute("products", productService.getAll());
-        req.getRequestDispatcher("/WEB-INF/views/products/manage.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/products/new");
     }
 }
