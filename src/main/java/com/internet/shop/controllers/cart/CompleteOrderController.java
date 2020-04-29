@@ -30,8 +30,8 @@ public class CompleteOrderController extends HttpServlet {
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         List<Product> products = List.copyOf(shoppingCart.getProducts());
         shoppingCartService.clear(shoppingCart);
-        Order order = orderService.completeOrder(products, userService.get(USER_ID));
-        req.setAttribute("products", order.getProducts());
+        orderService.completeOrder(products, userService.get(USER_ID));
+        req.setAttribute("products", products);
         req.getRequestDispatcher("/WEB-INF/views/orders/show.jsp").forward(req, resp);
     }
 }
