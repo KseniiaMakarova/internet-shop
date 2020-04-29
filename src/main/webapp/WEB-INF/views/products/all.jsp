@@ -31,8 +31,7 @@
             </tr>
         </c:forEach>
     </table>
-    <form method="get" action="${pageContext.request.contextPath}/cart/show">
-        <button type="submit">Show my cart</button>
-    </form>
+    <a href="${pageContext.request.contextPath}/cart/show">
+                    <button type="button">Show my cart</button></a>
 </body>
 </html>
