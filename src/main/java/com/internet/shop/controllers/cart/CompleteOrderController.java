@@ -1,6 +1,7 @@
 package com.internet.shop.controllers.cart;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.OrderService;
@@ -29,8 +30,8 @@ public class CompleteOrderController extends HttpServlet {
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         List<Product> products = List.copyOf(shoppingCart.getProducts());
         shoppingCartService.clear(shoppingCart);
-        orderService.completeOrder(products, userService.get(USER_ID));
-        req.setAttribute("products", products);
+        Order order = orderService.completeOrder(products, userService.get(USER_ID));
+        req.setAttribute("order", order);
         req.getRequestDispatcher("/WEB-INF/views/orders/show.jsp").forward(req, resp);
     }
 }
