@@ -46,11 +46,6 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public List<Product> getAllProducts(ShoppingCart shoppingCart) {
-        return shoppingCart.getProducts();
-    }
-
-    @Override
     public ShoppingCart create(ShoppingCart shoppingCart) {
         return shoppingCartDao.create(shoppingCart);
     }
