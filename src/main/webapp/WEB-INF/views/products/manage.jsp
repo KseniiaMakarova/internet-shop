@@ -32,7 +32,7 @@
         </c:forEach>
     </table>
     <h2>To add a new product, please provide the following:</h2>
-    <form method="post" action="${pageContext.request.contextPath}/products/new">
+    <form method="post" action="${pageContext.request.contextPath}/products/manage">
         Name: <input type="text" name="name">
         Price: <input type="number" name="price">
         <button type="submit">Submit</button>

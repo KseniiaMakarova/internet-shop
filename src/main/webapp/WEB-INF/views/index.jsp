@@ -9,7 +9,7 @@
     <a href="${pageContext.request.contextPath}
                                 /users/all">VIEW ALL USERS</a><p>
     <a href="${pageContext.request.contextPath}
-                                /products/new">MANAGE PRODUCTS</a><p>
+                                /products/manage">MANAGE PRODUCTS</a><p>
     <a href="${pageContext.request.contextPath}
                                 /products/all">BUY PRODUCTS</a><p>
     <a href="${pageContext.request.contextPath}

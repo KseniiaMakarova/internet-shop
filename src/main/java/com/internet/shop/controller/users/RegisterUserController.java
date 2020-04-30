@@ -1,4 +1,4 @@
-package com.internet.shop.controllers.users;
+package com.internet.shop.controller.users;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.ShoppingCart;
@@ -7,10 +7,12 @@ import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet("/users/register")
 public class RegisterUserController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final UserService userService =
