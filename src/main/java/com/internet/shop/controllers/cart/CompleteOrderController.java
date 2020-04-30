@@ -24,7 +24,7 @@ public class CompleteOrderController extends HttpServlet {
             (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         ShoppingCart shoppingCart = shoppingCartService.getByUserId(USER_ID);
         List<Product> products = List.copyOf(shoppingCart.getProducts());

@@ -27,8 +27,7 @@
             </tr>
         </c:forEach>
     </table>
-    <form method="post" action="${pageContext.request.contextPath}/orders/complete">
-        <button type="submit">Complete Order</button>
-    </form>
+    <a href="${pageContext.request.contextPath}/orders/complete">
+                    <button type="button">Complete Order</button></a>
 </body>
 </html>
