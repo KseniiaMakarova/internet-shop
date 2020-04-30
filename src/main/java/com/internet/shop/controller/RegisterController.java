@@ -1,4 +1,4 @@
-package com.internet.shop.controller.users;
+package com.internet.shop.controller;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.ShoppingCart;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/users/register")
-public class RegisterUserController extends HttpServlet {
+@WebServlet("/register")
+public class RegisterController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);
@@ -23,7 +23,7 @@ public class RegisterUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/users/register.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class RegisterUserController extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message", "Your repeated password was different. Try again.");
-            req.getRequestDispatcher("/WEB-INF/views/users/register.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req, resp);
         }
     }
 }
