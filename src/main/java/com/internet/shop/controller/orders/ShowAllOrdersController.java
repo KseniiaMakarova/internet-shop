@@ -1,6 +1,5 @@
 package com.internet.shop.controller.orders;
 
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Order;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.UserService;
@@ -15,11 +14,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/orders/all")
 public class ShowAllOrdersController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final OrderService orderService =
-            (OrderService) INJECTOR.getInstance(OrderService.class);
-    private final UserService userService =
-            (UserService) INJECTOR.getInstance(UserService.class);
+    private static OrderService orderService;
+    private static UserService userService;
+
+    @Override
+    public void init() {
+        orderService = (OrderService)
+                getServletContext().getAttribute("orderService");
+        userService = (UserService)
+                getServletContext().getAttribute("userService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

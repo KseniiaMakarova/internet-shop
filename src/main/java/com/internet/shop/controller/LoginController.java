@@ -1,7 +1,6 @@
 package com.internet.shop.controller;
 
 import com.internet.shop.exception.AuthenticationException;
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.User;
 import com.internet.shop.security.AuthenticationService;
 import java.io.IOException;
@@ -14,9 +13,13 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final AuthenticationService authenticationService =
-            (AuthenticationService) INJECTOR.getInstance(AuthenticationService.class);
+    private static AuthenticationService authenticationService;
+
+    @Override
+    public void init() {
+        authenticationService = (AuthenticationService)
+                getServletContext().getAttribute("authenticationService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

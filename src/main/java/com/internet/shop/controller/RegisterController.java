@@ -1,6 +1,5 @@
 package com.internet.shop.controller;
 
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
 import com.internet.shop.service.ShoppingCartService;
@@ -14,11 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final UserService userService =
-            (UserService) INJECTOR.getInstance(UserService.class);
-    private final ShoppingCartService shoppingCartService =
-            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
+    private static UserService userService;
+    private static ShoppingCartService shoppingCartService;
+
+    @Override
+    public void init() {
+        userService = (UserService)
+                getServletContext().getAttribute("userService");
+        shoppingCartService = (ShoppingCartService)
+                getServletContext().getAttribute("shoppingCartService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

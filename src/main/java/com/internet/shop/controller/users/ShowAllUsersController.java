@@ -1,6 +1,5 @@
 package com.internet.shop.controller.users;
 
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.User;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
@@ -13,9 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/users/all")
 public class ShowAllUsersController extends HttpServlet {
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final UserService userService =
-            (UserService) INJECTOR.getInstance(UserService.class);
+    private static UserService userService;
+
+    @Override
+    public void init() {
+        userService = (UserService)
+                getServletContext().getAttribute("userService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

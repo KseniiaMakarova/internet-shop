@@ -1,6 +1,5 @@
 package com.internet.shop.controller.cart;
 
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ProductService;
@@ -14,11 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/products/remove-from-cart")
 public class RemoveProductFromCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final ShoppingCartService shoppingCartService =
-            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
-    private final ProductService productService =
-            (ProductService) INJECTOR.getInstance(ProductService.class);
+    private static ProductService productService;
+    private static ShoppingCartService shoppingCartService;
+
+    @Override
+    public void init() {
+        productService = (ProductService)
+                getServletContext().getAttribute("productService");
+        shoppingCartService = (ShoppingCartService)
+                getServletContext().getAttribute("shoppingCartService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

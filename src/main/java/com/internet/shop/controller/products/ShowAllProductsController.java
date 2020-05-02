@@ -1,6 +1,5 @@
 package com.internet.shop.controller.products;
 
-import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
 import java.io.IOException;
@@ -13,9 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/products/all")
 public class ShowAllProductsController extends HttpServlet {
-    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
-    private final ProductService productService =
-            (ProductService) INJECTOR.getInstance(ProductService.class);
+    private static ProductService productService;
+
+    @Override
+    public void init() {
+        productService = (ProductService)
+                getServletContext().getAttribute("productService");
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
