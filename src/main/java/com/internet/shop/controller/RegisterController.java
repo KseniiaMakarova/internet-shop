@@ -42,7 +42,7 @@ public class RegisterController extends HttpServlet {
             shoppingCartService.create(new ShoppingCart(user));
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
-            req.setAttribute("message", "Your repeated password was different. Try again.");
+            req.setAttribute("message", "Your passwords are different. Please try again.");
             req.getRequestDispatcher("/views/register.jsp").forward(req, resp);
         }
     }
