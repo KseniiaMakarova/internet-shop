@@ -39,6 +39,6 @@ public class CompleteOrderController extends HttpServlet {
         shoppingCartService.clear(shoppingCart);
         Order order = orderService.completeOrder(products, userService.get(USER_ID));
         req.setAttribute("order", order);
-        req.getRequestDispatcher("/WEB-INF/views/orders/show.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/orders/show.jsp").forward(req, resp);
     }
 }
