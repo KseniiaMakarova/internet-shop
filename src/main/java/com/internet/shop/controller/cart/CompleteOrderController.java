@@ -1,5 +1,6 @@
 package com.internet.shop.controller.cart;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
@@ -23,12 +24,13 @@ public class CompleteOrderController extends HttpServlet {
 
     @Override
     public void init() {
-        userService = (UserService)
-                getServletContext().getAttribute("userService");
-        shoppingCartService = (ShoppingCartService)
-                getServletContext().getAttribute("shoppingCartService");
-        orderService = (OrderService)
-                getServletContext().getAttribute("orderService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        userService =
+                (UserService) injector.getInstance(UserService.class);
+        shoppingCartService =
+                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        orderService =
+                (OrderService) injector.getInstance(OrderService.class);
     }
 
     @Override

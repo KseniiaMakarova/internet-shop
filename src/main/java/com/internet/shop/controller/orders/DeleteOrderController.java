@@ -1,5 +1,6 @@
 package com.internet.shop.controller.orders;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.service.OrderService;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,9 @@ public class DeleteOrderController extends HttpServlet {
 
     @Override
     public void init() {
-        orderService = (OrderService)
-                getServletContext().getAttribute("orderService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        orderService =
+                (OrderService) injector.getInstance(OrderService.class);
     }
 
     @Override

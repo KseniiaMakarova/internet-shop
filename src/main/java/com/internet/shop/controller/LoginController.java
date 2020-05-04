@@ -1,6 +1,7 @@
 package com.internet.shop.controller;
 
 import com.internet.shop.exception.AuthenticationException;
+import com.internet.shop.lib.Injector;
 import com.internet.shop.model.User;
 import com.internet.shop.security.AuthenticationService;
 import java.io.IOException;
@@ -17,8 +18,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     public void init() {
-        authenticationService = (AuthenticationService)
-                getServletContext().getAttribute("authenticationService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        authenticationService =
+                (AuthenticationService) injector.getInstance(AuthenticationService.class);
     }
 
     @Override

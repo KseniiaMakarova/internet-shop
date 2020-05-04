@@ -1,5 +1,6 @@
 package com.internet.shop.controller.users;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,9 @@ public class DeleteUserController extends HttpServlet {
 
     @Override
     public void init() {
-        userService = (UserService)
-                getServletContext().getAttribute("userService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        userService =
+                (UserService) injector.getInstance(UserService.class);
     }
 
     @Override

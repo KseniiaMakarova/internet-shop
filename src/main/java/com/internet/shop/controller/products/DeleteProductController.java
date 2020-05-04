@@ -1,5 +1,6 @@
 package com.internet.shop.controller.products;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.service.ProductService;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -13,8 +14,9 @@ public class DeleteProductController extends HttpServlet {
 
     @Override
     public void init() {
-        productService = (ProductService)
-                getServletContext().getAttribute("productService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        productService =
+                (ProductService) injector.getInstance(ProductService.class);
     }
 
     @Override

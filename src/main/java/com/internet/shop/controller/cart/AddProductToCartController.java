@@ -1,5 +1,6 @@
 package com.internet.shop.controller.cart;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ProductService;
@@ -18,10 +19,11 @@ public class AddProductToCartController extends HttpServlet {
 
     @Override
     public void init() {
-        productService = (ProductService)
-                getServletContext().getAttribute("productService");
-        shoppingCartService = (ShoppingCartService)
-                getServletContext().getAttribute("shoppingCartService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        productService =
+                (ProductService) injector.getInstance(ProductService.class);
+        shoppingCartService =
+                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
     }
 
     @Override

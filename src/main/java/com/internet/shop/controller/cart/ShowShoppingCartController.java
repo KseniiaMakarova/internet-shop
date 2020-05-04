@@ -1,5 +1,6 @@
 package com.internet.shop.controller.cart;
 
+import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ShoppingCartService;
 import java.io.IOException;
@@ -17,8 +18,9 @@ public class ShowShoppingCartController extends HttpServlet {
 
     @Override
     public void init() {
-        shoppingCartService = (ShoppingCartService)
-                getServletContext().getAttribute("shoppingCartService");
+        Injector injector = (Injector) getServletContext().getAttribute("injector");
+        shoppingCartService =
+                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
     }
 
     @Override
