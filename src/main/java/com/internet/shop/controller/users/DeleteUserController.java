@@ -10,14 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/users/delete")
 public class DeleteUserController extends HttpServlet {
-    private static UserService userService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        userService =
-                (UserService) injector.getInstance(UserService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final UserService userService =
+            (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

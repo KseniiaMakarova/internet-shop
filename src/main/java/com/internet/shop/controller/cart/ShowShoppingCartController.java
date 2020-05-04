@@ -14,14 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/cart/show")
 public class ShowShoppingCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static ShoppingCartService shoppingCartService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        shoppingCartService =
-                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final ShoppingCartService shoppingCartService =
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

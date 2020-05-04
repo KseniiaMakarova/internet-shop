@@ -14,17 +14,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/products/remove-from-cart")
 public class RemoveProductFromCartController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static ProductService productService;
-    private static ShoppingCartService shoppingCartService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        productService =
-                (ProductService) injector.getInstance(ProductService.class);
-        shoppingCartService =
-                (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final ShoppingCartService shoppingCartService =
+            (ShoppingCartService) INJECTOR.getInstance(ShoppingCartService.class);
+    private final ProductService productService =
+            (ProductService) INJECTOR.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

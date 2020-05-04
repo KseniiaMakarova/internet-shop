@@ -15,17 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/orders/all")
 public class ShowAllOrdersController extends HttpServlet {
     private static final Long USER_ID = 1L;
-    private static OrderService orderService;
-    private static UserService userService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        orderService =
-                (OrderService) injector.getInstance(OrderService.class);
-        userService =
-                (UserService) injector.getInstance(UserService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final OrderService orderService =
+            (OrderService) INJECTOR.getInstance(OrderService.class);
+    private final UserService userService =
+            (UserService) INJECTOR.getInstance(UserService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

@@ -14,14 +14,9 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/login")
 public class LoginController extends HttpServlet {
-    private static AuthenticationService authenticationService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        authenticationService =
-                (AuthenticationService) injector.getInstance(AuthenticationService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final AuthenticationService authenticationService =
+            (AuthenticationService) INJECTOR.getInstance(AuthenticationService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

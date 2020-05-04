@@ -12,14 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/orders/show")
 public class ShowOrderController extends HttpServlet {
-    private static OrderService orderService;
-
-    @Override
-    public void init() {
-        Injector injector = (Injector) getServletContext().getAttribute("injector");
-        orderService =
-                (OrderService) injector.getInstance(OrderService.class);
-    }
+    private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
+    private final OrderService orderService =
+            (OrderService) INJECTOR.getInstance(OrderService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
