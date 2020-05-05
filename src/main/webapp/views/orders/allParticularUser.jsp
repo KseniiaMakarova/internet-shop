@@ -38,7 +38,7 @@
                                                 /orders/show?id=${order.id}">SHOW</a>
                                     </td>
                                     <td>
-                                            <a href="${pageContext.request.contextPath}
+                                        <a href="${pageContext.request.contextPath}
                                                 /orders/delete?id=${order.id}">DELETE</a>
                                     </td>
                                 </tr>
