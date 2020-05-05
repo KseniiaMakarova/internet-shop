@@ -37,7 +37,7 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/products/all">BUY PRODUCTS</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/orders/all">MY ORDERS</a>
+                        <a class="nav-link" href="${pageContext.request.contextPath}/orders/all-my">MY ORDERS</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/logout">LOG OUT</a>
