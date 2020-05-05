@@ -43,8 +43,10 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <a href="${pageContext.request.contextPath}/orders/all">
-                        <button type="button" class="btn btn-dark">Show all my orders</button></a>
+                    <c:if test="${isAdmin == false}">
+                        <a href="${pageContext.request.contextPath}/orders/all">
+                                <button type="button" class="btn btn-dark">Show all my orders</button></a>
+                    </c:if>
                 </div>
             </div>
         </div>

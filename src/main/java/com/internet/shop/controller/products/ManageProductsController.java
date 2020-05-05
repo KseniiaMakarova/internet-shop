@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/products/manage")
-public class CreateProductController extends HttpServlet {
+public class ManageProductsController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final ProductService productService =
             (ProductService) INJECTOR.getInstance(ProductService.class);

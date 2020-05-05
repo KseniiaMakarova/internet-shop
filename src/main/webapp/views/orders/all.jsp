@@ -24,7 +24,9 @@
                             <tr>
                                 <th scope="col">ID</th>
                                 <th scope="col">Show</th>
-                                <th scope="col">Delete</th>
+                                <c:if test="${isAdmin == true}">
+                                    <th scope="col">Delete</th>
+                                </c:if>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,10 +39,12 @@
                                         <a href="${pageContext.request.contextPath}
                                                 /orders/show?id=${order.id}">SHOW</a>
                                     </td>
-                                    <td>
-                                        <a href="${pageContext.request.contextPath}
+                                    <c:if test="${isAdmin == true}">
+                                        <td>
+                                            <a href="${pageContext.request.contextPath}
                                                 /orders/delete?id=${order.id}">DELETE</a>
-                                    </td>
+                                        </td>
+                                    </c:if>
                                 </tr>
                             </c:forEach>
                         </tbody>

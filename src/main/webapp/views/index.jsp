@@ -25,6 +25,9 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/login">LOG IN</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/inject-admin">INJECT ADMIN</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/users/all">VIEW ALL USERS</a>
                     </li>
                     <li class="nav-item">
@@ -35,6 +38,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${pageContext.request.contextPath}/orders/all">MY ORDERS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="${pageContext.request.contextPath}/logout">LOG OUT</a>
                     </li>
                 </ul>
             </div>

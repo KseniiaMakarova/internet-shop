@@ -25,6 +25,7 @@
                                 <th scope="col">ID</th>
                                 <th scope="col">Login</th>
                                 <th scope="col">Full name</th>
+                                <th scope="col">Show orders</th>
                                 <th scope="col">Delete</th>
                             </tr>
                         </thead>
@@ -39,6 +40,10 @@
                                     </td>
                                     <td>
                                         <c:out value="${user.name}"/>
+                                    </td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}
+                                                /orders/all?id=${user.id}">SHOW ORDERS</a>
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}

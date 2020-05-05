@@ -58,7 +58,7 @@
                                 <input type="number" name="price" class="form-control" placeholder="Price">
                             </div>
                             <div class="col-2">
-                                <button type="submit" class="btn btn-dark">Add to cart</button>
+                                <button type="submit" class="btn btn-dark">Add product</button>
                             </div>
                         </div>
                     </form>
