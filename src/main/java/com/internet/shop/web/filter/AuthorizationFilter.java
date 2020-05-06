@@ -16,8 +16,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.log4j.Logger;
 
 public class AuthorizationFilter implements Filter {
+    private static final Logger LOGGER = Logger.getLogger(AuthenticationFilter.class);
     private static final String USER_ID = "userId";
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final UserService userService =
@@ -51,6 +53,7 @@ public class AuthorizationFilter implements Filter {
                 || isUserAuthorized(userService.get(userId), protectedUrls.get(servletPath))) {
             filterChain.doFilter(req, resp);
         } else {
+            LOGGER.info("User with ID " + userId + " tried to access a secure resource.");
             req.getRequestDispatcher("/views/accessDenied.jsp").forward(req, resp);
         }
     }
