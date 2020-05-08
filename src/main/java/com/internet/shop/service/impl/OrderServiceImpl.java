@@ -20,13 +20,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order completeOrder(List<Product> products, User user) {
-        return orderDao.create(new Order(products, user));
+        return orderDao.create(new Order(products, user.getId()));
     }
 
     @Override
     public List<Order> getUserOrders(User user) {
         return orderDao.getAll().stream()
-                .filter(order -> order.getUser().equals(user))
+                .filter(order -> order.getUserId().equals(user.getId()))
                 .collect(Collectors.toList());
     }
 
