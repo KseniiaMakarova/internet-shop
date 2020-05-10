@@ -8,7 +8,7 @@ import java.util.Properties;
 public class ConnectionUtil {
     static {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("Can not find MySQL Driver", e);
         }
