@@ -18,7 +18,7 @@
         <div class="container h-50">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-8" style="text-align: center">
-                    <h3>Your orders:</h3>
+                    <h3>All user orders:</h3>
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>

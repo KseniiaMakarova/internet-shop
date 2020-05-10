@@ -39,7 +39,7 @@ public class RegisterController extends HttpServlet {
             User user = new User(name, login, password);
             user.setRoles(Set.of(Role.of("USER")));
             userService.create(user);
-            shoppingCartService.create(new ShoppingCart(user));
+            shoppingCartService.create(new ShoppingCart(user.getId()));
             resp.sendRedirect(req.getContextPath() + "/");
         } else {
             req.setAttribute("message", "Your passwords are different. Please try again.");

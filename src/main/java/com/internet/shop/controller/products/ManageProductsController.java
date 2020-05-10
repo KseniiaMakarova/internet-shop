@@ -4,6 +4,7 @@ import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
 import java.io.IOException;
+import java.math.BigDecimal;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,7 @@ public class ManageProductsController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String price = req.getParameter("price");
-        productService.create(new Product(name, Double.parseDouble(price)));
+        productService.create(new Product(name, new BigDecimal(price)));
         req.setAttribute("products", productService.getAll());
         req.getRequestDispatcher("/views/products/manage.jsp").forward(req, resp);
     }

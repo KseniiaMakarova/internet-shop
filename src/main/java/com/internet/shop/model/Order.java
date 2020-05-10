@@ -1,16 +1,15 @@
 package com.internet.shop.model;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Order {
     private Long id;
-    private User user;
+    private Long userId;
     private List<Product> products;
 
-    public Order(List<Product> products, User user) {
+    public Order(List<Product> products, Long userId) {
         this.products = products;
-        this.user = user;
+        this.userId = userId;
     }
 
     public List<Product> getProducts() {
@@ -29,20 +28,11 @@ public class Order {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" + "id=" + id
-                + ", user=" + user.getName()
-                + ", products=" + products.stream()
-                                    .map(Product::getName)
-                                    .collect(Collectors.toList()) + '}';
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
