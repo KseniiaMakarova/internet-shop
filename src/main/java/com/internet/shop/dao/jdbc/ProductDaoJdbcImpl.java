@@ -35,7 +35,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             LOGGER.info(element + " was created.");
             return element;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to create product", e);
+            throw new DataProcessingException("Unable to create " + element, e);
         }
     }
 
@@ -46,17 +46,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            if (!resultSet.next()) {
-                return Optional.empty();
-            } else {
-                String name = resultSet.getString("name");
-                BigDecimal price = resultSet.getBigDecimal("price");
-                Product product = new Product(name, price);
-                product.setId(id);
+            if (resultSet.next()) {
+                Product product = getProductFromResultSet(resultSet);
                 return Optional.of(product);
             }
+            return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to get product", e);
+            throw new DataProcessingException("Unable to get product with ID " + id, e);
         }
     }
 
@@ -68,11 +64,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Long id = resultSet.getLong("product_id");
-                String name = resultSet.getString("name");
-                BigDecimal price = resultSet.getBigDecimal("price");
-                Product product = new Product(name, price);
-                product.setId(id);
+                Product product = getProductFromResultSet(resultSet);
                 allProducts.add(product);
             }
             return allProducts;
@@ -94,7 +86,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             LOGGER.info(element + " was updated.");
             return element;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to update product", e);
+            throw new DataProcessingException("Unable to update " + element, e);
         }
     }
 
@@ -104,11 +96,20 @@ public class ProductDaoJdbcImpl implements ProductDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
-            int result = statement.executeUpdate();
+            int numberOfRowsDeleted = statement.executeUpdate();
             LOGGER.info("A product with id " + id + " was deleted.");
-            return result != 0;
+            return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to delete product", e);
+            throw new DataProcessingException("Unable to delete product with ID " + id, e);
         }
+    }
+
+    private Product getProductFromResultSet(ResultSet resultSet) throws SQLException {
+        Long id = resultSet.getLong("product_id");
+        String name = resultSet.getString("name");
+        BigDecimal price = resultSet.getBigDecimal("price");
+        Product product = new Product(name, price);
+        product.setId(id);
+        return product;
     }
 }
