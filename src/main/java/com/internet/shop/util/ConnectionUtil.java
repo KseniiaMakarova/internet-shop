@@ -3,9 +3,13 @@ package com.internet.shop.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class ConnectionUtil {
+    private static final String USER = "root";
+    private static final String PASSWORD = "********";
+    private static final String URL =
+            "jdbc:mysql://localhost:3306/internet_shop?serverTimezone=UTC";
+
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -15,12 +19,8 @@ public class ConnectionUtil {
     }
 
     public static Connection getConnection() {
-        Properties dbProperties = new Properties();
-        dbProperties.put("user", "root");
-        dbProperties.put("password", "********");
-        String url = "jdbc:mysql://localhost:3306/internet_shop?serverTimezone=UTC";
         try {
-            return DriverManager.getConnection(url, dbProperties);
+            return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException("Can not establish connection to DB", e);
         }
