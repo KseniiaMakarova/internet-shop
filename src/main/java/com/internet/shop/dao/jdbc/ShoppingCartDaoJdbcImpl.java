@@ -133,7 +133,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     private List<Product> getProductsFromShoppingCartId(Long shoppingCartId) throws SQLException {
         String selectProductIdQuery = "SELECT products.* FROM carts_products "
-                + "JOIN products USING product_id WHERE cart_id = ?;";
+                + "JOIN products USING (product_id) WHERE cart_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(selectProductIdQuery);
             statement.setLong(1, shoppingCartId);

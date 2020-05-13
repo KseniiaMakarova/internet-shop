@@ -28,6 +28,11 @@ public class Role {
         this.roleName = roleName;
     }
 
+    @Override
+    public String toString() {
+        return "Role {" + "roleName=" + roleName + '}';
+    }
+
     public enum RoleName {
         USER, ADMIN
     }

@@ -131,7 +131,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     private List<Product> getProductsFromOrderId(Long orderId) throws SQLException {
         String selectProductIdQuery = "SELECT products.* FROM orders_products "
-                + "JOIN products USING product_id WHERE order_id = ?;";
+                + "JOIN products USING (product_id) WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(selectProductIdQuery);
             statement.setLong(1, orderId);
