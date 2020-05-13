@@ -130,31 +130,22 @@ public class OrderDaoJdbcImpl implements OrderDao {
     }
 
     private List<Product> getProductsFromOrderId(Long orderId) throws SQLException {
-        String selectProductIdQuery = "SELECT product_id FROM orders_products WHERE order_id = ?;";
+        String selectProductIdQuery = "SELECT products.* FROM orders_products "
+                + "JOIN products USING product_id WHERE order_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(selectProductIdQuery);
             statement.setLong(1, orderId);
             ResultSet resultSet = statement.executeQuery();
             List<Product> products = new ArrayList<>();
             while (resultSet.next()) {
-                products.add(getProductFromProductId(resultSet.getLong("product_id")));
+                Long id = resultSet.getLong("product_id");
+                String name = resultSet.getString("name");
+                BigDecimal price = resultSet.getBigDecimal("price");
+                Product product = new Product(name, price);
+                product.setId(id);
+                products.add(product);
             }
             return products;
-        }
-    }
-
-    private Product getProductFromProductId(Long productId) throws SQLException {
-        String selectProductQuery = "SELECT * FROM products WHERE product_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(selectProductQuery);
-            statement.setLong(1, productId);
-            ResultSet resultSet = statement.executeQuery();
-            resultSet.next();
-            String name = resultSet.getString("name");
-            BigDecimal price = resultSet.getBigDecimal("price");
-            Product product = new Product(name, price);
-            product.setId(productId);
-            return product;
         }
     }
 
