@@ -93,7 +93,7 @@ public class UserDaoJdbcImpl implements UserDao {
             }
             return allUsers;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to retrieve all products", e);
+            throw new DataProcessingException("Unable to retrieve all users", e);
         }
     }
 
@@ -108,7 +108,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.setString(3, element.getPassword());
             statement.setLong(4, element.getId());
             statement.executeUpdate();
-            truncateUsersRoles();
+            deleteUserFromUsersRoles(element.getId());
             insertUsersRoles(element);
             LOGGER.info(element + " was updated.");
             return element;
@@ -128,7 +128,7 @@ public class UserDaoJdbcImpl implements UserDao {
             LOGGER.info("A product with id " + id + " was deleted.");
             return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to delete product with ID " + id, e);
+            throw new DataProcessingException("Unable to delete user with ID " + id, e);
         }
     }
 
@@ -181,14 +181,6 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(deleteUserQuery);
             statement.setLong(1, userId);
-            statement.executeUpdate();
-        }
-    }
-
-    private void truncateUsersRoles() throws SQLException {
-        String truncateUsersRolesQuery = "TRUNCATE users_roles;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(truncateUsersRolesQuery);
             statement.executeUpdate();
         }
     }
