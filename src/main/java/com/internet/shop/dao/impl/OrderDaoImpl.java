@@ -3,8 +3,10 @@ package com.internet.shop.dao.impl;
 import com.internet.shop.dao.OrderDao;
 import com.internet.shop.db.Storage;
 import com.internet.shop.model.Order;
+import com.internet.shop.model.User;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class OrderDaoImpl implements OrderDao {
@@ -19,6 +21,13 @@ public class OrderDaoImpl implements OrderDao {
         return Storage.orders.stream()
                 .filter(order -> order.getId().equals(id))
                 .findFirst();
+    }
+
+    @Override
+    public List<Order> getUserOrders(User user) {
+        return getAll().stream()
+                .filter(order -> order.getUserId().equals(user.getId()))
+                .collect(Collectors.toList());
     }
 
     @Override
