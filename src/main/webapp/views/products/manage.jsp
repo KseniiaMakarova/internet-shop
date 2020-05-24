@@ -52,11 +52,13 @@
                         <h4>To add a new product, please provide the following:</h4>
                         <div class="form-row">
                             <div class="col-5">
-                                <input type="text" name="name" class="form-control" placeholder="Name" required>
+                                <label for="Name"></label>
+                                <input type="text" name="name" class="form-control" id="Name" placeholder="Name" required>
                                 <div class="invalid-feedback">Please enter product name.</div>
                             </div>
                             <div class="col-5">
-                                <input type="number" min="1" name="price" class="form-control" placeholder="Price" required>
+                                <label for="Price"></label>
+                                <input type="number" min="1" name="price" class="form-control" id="Price" placeholder="Price" required>
                                 <div class="invalid-feedback">Please enter product price.</div>
                             </div>
                             <div class="col-2">
