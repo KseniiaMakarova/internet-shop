@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,24 +22,6 @@ import org.apache.logging.log4j.Logger;
 @Dao
 public class UserDaoJdbcImpl implements UserDao {
     private static final Logger LOGGER = LogManager.getLogger(UserDaoJdbcImpl.class);
-
-    @Override
-    public Optional<User> findByLogin(String login) {
-        String selectUserQuery = "SELECT * FROM users WHERE login = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(selectUserQuery);
-            statement.setString(1, login);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                User user = getUserFromResultSet(resultSet);
-                user.setRoles(getRolesFromUserId(user.getId(), connection));
-                return Optional.of(user);
-            }
-            return Optional.empty();
-        } catch (SQLException e) {
-            throw new DataProcessingException("Unable to get user with login " + login, e);
-        }
-    }
 
     @Override
     public User create(User element) {
@@ -64,18 +47,20 @@ public class UserDaoJdbcImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> findByLogin(String login) {
+        try {
+            return getUserByParameter(
+                    "SELECT * FROM users WHERE login = ", "'" + login + "'");
+        } catch (SQLException e) {
+            throw new DataProcessingException("Unable to get user with login " + login, e);
+        }
+    }
+
+    @Override
     public Optional<User> get(Long id) {
-        String selectUserQuery = "SELECT * FROM users WHERE user_id = ?;";
-        try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(selectUserQuery);
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                User user = getUserFromResultSet(resultSet);
-                user.setRoles(getRolesFromUserId(id, connection));
-                return Optional.of(user);
-            }
-            return Optional.empty();
+        try {
+            return getUserByParameter(
+                    "SELECT * FROM users WHERE user_id = ", String.valueOf(id));
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to get user with ID " + id, e);
         }
@@ -149,6 +134,20 @@ public class UserDaoJdbcImpl implements UserDao {
             insertStatement.setLong(1, user.getId());
             insertStatement.setLong(2, resultSet.getLong("role_id"));
             insertStatement.executeUpdate();
+        }
+    }
+
+    private Optional<User> getUserByParameter(String query, String parameter)
+            throws SQLException {
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query + parameter + ";");
+            if (resultSet.next()) {
+                User user = getUserFromResultSet(resultSet);
+                user.setRoles(getRolesFromUserId(user.getId(), connection));
+                return Optional.of(user);
+            }
+            return Optional.empty();
         }
     }
 
