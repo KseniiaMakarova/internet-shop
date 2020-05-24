@@ -42,13 +42,15 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User element) {
-        String insertUserQuery = "INSERT INTO users (name, login, password) VALUES (?, ?, ?);";
+        String insertUserQuery = "INSERT INTO users (name, login, password, salt) "
+                + "VALUES (?, ?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(insertUserQuery,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, element.getName());
             statement.setString(2, element.getLogin());
             statement.setString(3, element.getPassword());
+            statement.setBytes(4, element.getSalt());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -99,14 +101,15 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User element) {
-        String updateUserQuery = "UPDATE users SET name = ?, login = ?, password = ? "
+        String updateUserQuery = "UPDATE users SET name = ?, login = ?, password = ?, salt = ? "
                 + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(updateUserQuery);
             statement.setString(1, element.getName());
             statement.setString(2, element.getLogin());
             statement.setString(3, element.getPassword());
-            statement.setLong(4, element.getId());
+            statement.setBytes(4, element.getSalt());
+            statement.setLong(5, element.getId());
             statement.executeUpdate();
             deleteUserFromUsersRoles(element.getId());
             insertUsersRoles(element);
@@ -125,7 +128,7 @@ public class UserDaoJdbcImpl implements UserDao {
             PreparedStatement statement = connection.prepareStatement(deleteUserQuery);
             statement.setLong(1, id);
             int numberOfRowsDeleted = statement.executeUpdate();
-            LOGGER.info("A product with id " + id + " was deleted.");
+            LOGGER.info("A user with id " + id + " was deleted.");
             return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to delete user with ID " + id, e);
@@ -156,8 +159,10 @@ public class UserDaoJdbcImpl implements UserDao {
         String name = resultSet.getString("name");
         String login = resultSet.getString("login");
         String password = resultSet.getString("password");
+        byte[] salt = resultSet.getBytes("salt");
         User user = new User(name, login, password);
         user.setId(id);
+        user.setSalt(salt);
         return user;
     }
 

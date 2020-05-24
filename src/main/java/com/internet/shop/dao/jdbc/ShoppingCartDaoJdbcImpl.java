@@ -102,7 +102,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             PreparedStatement statement = connection.prepareStatement(deleteShoppingCartQuery);
             statement.setLong(1, id);
             int numberOfRowsDeleted = statement.executeUpdate();
-            LOGGER.info("A product with id " + id + " was deleted.");
+            LOGGER.info("A cart with id " + id + " was deleted.");
             return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to delete cart with ID " + id, e);
