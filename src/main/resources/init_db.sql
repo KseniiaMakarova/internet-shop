@@ -5,6 +5,7 @@ CREATE TABLE `products`
     `product_id` BIGINT(11)     NOT NULL AUTO_INCREMENT,
     `name`       VARCHAR(225)   NOT NULL,
     `price`      DECIMAL(10, 2) NOT NULL,
+    `available`  TINYINT        NOT NULL,
     PRIMARY KEY (`product_id`)
 );
 CREATE TABLE `users`

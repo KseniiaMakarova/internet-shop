@@ -29,7 +29,7 @@ public class ManageProductsController extends HttpServlet {
             throws ServletException, IOException {
         String name = req.getParameter("name");
         String price = req.getParameter("price");
-        productService.create(new Product(name, new BigDecimal(price)));
+        productService.create(new Product(name, new BigDecimal(price), true));
         req.setAttribute("products", productService.getAll());
         req.getRequestDispatcher("/views/products/manage.jsp").forward(req, resp);
     }

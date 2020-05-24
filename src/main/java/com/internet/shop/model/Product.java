@@ -7,10 +7,12 @@ public class Product {
     private Long id;
     private String name;
     private BigDecimal price;
+    private boolean available;
 
-    public Product(String name, BigDecimal price) {
+    public Product(String name, BigDecimal price, boolean available) {
         this.name = name;
         this.price = price;
+        this.available = available;
     }
 
     public Long getId() {
@@ -37,6 +39,14 @@ public class Product {
         this.price = price;
     }
 
+    public boolean isAvailable() {
+        return available;
+    }
+
+    public void setAvailable(boolean available) {
+        this.available = available;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -46,20 +56,22 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return Objects.equals(id, product.id)
+        return available == product.available
+                && Objects.equals(id, product.id)
                 && Objects.equals(name, product.name)
                 && Objects.equals(price, product.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, price);
+        return Objects.hash(id, name, price, available);
     }
 
     @Override
     public String toString() {
         return "Product {" + "id=" + id
                 + ", name='" + name + '\''
-                + ", price=" + price + '}';
+                + ", price=" + price
+                + ", available=" + available + '}';
     }
 }

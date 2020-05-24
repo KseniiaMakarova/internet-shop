@@ -22,12 +22,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Product create(Product element) {
-        String insertProductQuery = "INSERT INTO products (name, price) VALUES (?, ?);";
+        String insertProductQuery = "INSERT INTO products (name, price, available) "
+                + "VALUES (?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(insertProductQuery,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, element.getName());
             statement.setBigDecimal(2, element.getPrice());
+            statement.setBoolean(3, element.isAvailable());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -58,10 +60,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public List<Product> getAll() {
-        String selectAllProductsQuery = "SELECT * FROM products;";
+        String selectAllProductsQuery = "SELECT * FROM products WHERE available = ?;";
         List<Product> allProducts = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(selectAllProductsQuery);
+            statement.setBoolean(1, true);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Product product = getProductFromResultSet(resultSet);
@@ -75,13 +78,14 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Product update(Product element) {
-        String updateProductQuery = "UPDATE products SET name = ?, price = ? "
+        String updateProductQuery = "UPDATE products SET name = ?, price = ?, available = ? "
                 + "WHERE product_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(updateProductQuery);
             statement.setString(1, element.getName());
             statement.setBigDecimal(2, element.getPrice());
-            statement.setLong(3, element.getId());
+            statement.setBoolean(3, element.isAvailable());
+            statement.setLong(4, element.getId());
             statement.executeUpdate();
             LOGGER.info(element + " was updated.");
             return element;
@@ -92,15 +96,18 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteProductQuery = "DELETE FROM products WHERE product_id = ?;";
+        String updateAvailabilityQuery = "UPDATE products SET available = ? WHERE product_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(deleteProductQuery);
-            statement.setLong(1, id);
-            int numberOfRowsDeleted = statement.executeUpdate();
-            LOGGER.info("A product with id " + id + " was deleted.");
-            return numberOfRowsDeleted != 0;
+            PreparedStatement statement = connection.prepareStatement(updateAvailabilityQuery);
+            statement.setBoolean(1, false);
+            statement.setLong(2, id);
+            int numberOfRowsAffected = statement.executeUpdate();
+            LOGGER.info("A product with id " + id + " was marked as unavailable.");
+            deleteProductFromCarts(id, connection);
+            return numberOfRowsAffected != 0;
         } catch (SQLException e) {
-            throw new DataProcessingException("Unable to delete product with ID " + id, e);
+            throw new DataProcessingException("Unable to mark product with ID "
+                    + id + " as unavailable", e);
         }
     }
 
@@ -108,8 +115,19 @@ public class ProductDaoJdbcImpl implements ProductDao {
         Long id = resultSet.getLong("product_id");
         String name = resultSet.getString("name");
         BigDecimal price = resultSet.getBigDecimal("price");
-        Product product = new Product(name, price);
+        boolean available = resultSet.getBoolean("available");
+        Product product = new Product(name, price, available);
         product.setId(id);
         return product;
+    }
+
+    private void deleteProductFromCarts(Long productId, Connection connection)
+            throws SQLException {
+        String deleteProductQuery = "DELETE FROM carts_products WHERE product_id = ?;";
+        PreparedStatement statement = connection.prepareStatement(deleteProductQuery);
+        statement.setLong(1, productId);
+        statement.executeUpdate();
+        LOGGER.info("A product with id " + productId
+                + " was deleted from all shopping carts.");
     }
 }
