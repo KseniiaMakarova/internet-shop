@@ -18,7 +18,7 @@
     <body class="h-100">
         <div class="container h-50">
             <div class="row h-100 justify-content-center align-items-center">
-                <form method="post" action="${pageContext.request.contextPath}/login">
+                <form method="post" action="${pageContext.request.contextPath}/login" class="needs-validation" novalidate>
                     <c:set var="message" value="${message}"/>
                     <c:if test = "${message != null}">
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -31,12 +31,14 @@
                     <h4>Please enter your email and password to log in:</h4>
                     <div class="form-group">
                         <label for="InputEmail">Email address:</label>
-                        <input type="email" name="login" class="form-control" id="InputEmail" aria-describedby="emailHelp">
+                        <input type="email" name="login" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <div class="invalid-feedback">Please enter your email.</div>
                     </div>
                     <div class="form-group">
                         <label for="InputPassword">Password:</label>
-                        <input type="password" name="psw" class="form-control" id="InputPassword">
+                        <input type="password" name="psw" class="form-control" id="InputPassword" required>
+                        <div class="invalid-feedback">Please enter your password.</div>
                     </div>
                     <button type="submit" class="btn btn-dark">Log in</button>
                     <a href="${pageContext.request.contextPath}/register">
@@ -44,5 +46,22 @@
                 </form>
             </div>
         </div>
+        <script>
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    const forms = document.getElementsByClassName('needs-validation');
+                    Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
     </body>
 </html>

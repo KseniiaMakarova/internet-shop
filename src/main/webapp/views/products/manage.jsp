@@ -48,14 +48,16 @@
                             </c:forEach>
                         </tbody>
                     </table>
-                    <form method="post" action="${pageContext.request.contextPath}/products/manage">
+                    <form method="post" action="${pageContext.request.contextPath}/products/manage" class="needs-validation" novalidate>
                         <h4>To add a new product, please provide the following:</h4>
                         <div class="form-row">
                             <div class="col-5">
-                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                <input type="text" name="name" class="form-control" placeholder="Name" required>
+                                <div class="invalid-feedback">Please enter product name.</div>
                             </div>
                             <div class="col-5">
-                                <input type="number" name="price" class="form-control" placeholder="Price">
+                                <input type="number" min="1" name="price" class="form-control" placeholder="Price" required>
+                                <div class="invalid-feedback">Please enter product price.</div>
                             </div>
                             <div class="col-2">
                                 <button type="submit" class="btn btn-dark">Add product</button>
@@ -65,5 +67,22 @@
                 </div>
             </div>
         </div>
+        <script>
+            (function() {
+                'use strict';
+                window.addEventListener('load', function() {
+                    const forms = document.getElementsByClassName('needs-validation');
+                    Array.prototype.filter.call(forms, function (form) {
+                        form.addEventListener('submit', function (event) {
+                            if (form.checkValidity() === false) {
+                                event.preventDefault();
+                                event.stopPropagation();
+                            }
+                            form.classList.add('was-validated');
+                        }, false);
+                    });
+                }, false);
+            })();
+        </script>
     </body>
 </html>
