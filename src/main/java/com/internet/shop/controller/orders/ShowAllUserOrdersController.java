@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/orders/all-particular-user")
-public class ShowAllOrdersOfParticularUserController extends HttpServlet {
+@WebServlet("/user/orders")
+public class ShowAllUserOrdersController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final OrderService orderService =
             (OrderService) INJECTOR.getInstance(OrderService.class);
@@ -28,6 +28,6 @@ public class ShowAllOrdersOfParticularUserController extends HttpServlet {
         User user = userService.get(userId);
         List<Order> orders = orderService.getUserOrders(user);
         req.setAttribute("orders", orders);
-        req.getRequestDispatcher("/views/orders/allParticularUser.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/orders/allUser.jsp").forward(req, resp);
     }
 }

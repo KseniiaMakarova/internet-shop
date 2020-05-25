@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/products/add-to-cart")
+@WebServlet("/shopping-cart/products/add")
 public class AddProductToCartController extends HttpServlet {
     private static final String USER_ID = "userId";
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
@@ -28,6 +28,6 @@ public class AddProductToCartController extends HttpServlet {
         String productId = req.getParameter("id");
         Product product = productService.get(Long.valueOf(productId));
         shoppingCartService.addProduct(shoppingCart, product);
-        resp.sendRedirect(req.getContextPath() + "/products/all");
+        resp.sendRedirect(req.getContextPath() + "/products");
     }
 }

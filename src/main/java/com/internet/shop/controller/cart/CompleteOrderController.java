@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/orders/complete")
+@WebServlet("/order/complete")
 public class CompleteOrderController extends HttpServlet {
     private static final String USER_ID = "userId";
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
@@ -35,6 +35,6 @@ public class CompleteOrderController extends HttpServlet {
         shoppingCartService.clear(shoppingCart);
         Order order = orderService.completeOrder(products, userService.get(userId));
         req.setAttribute("order", order);
-        req.getRequestDispatcher("/views/orders/show.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/orders/info.jsp").forward(req, resp);
     }
 }

@@ -42,13 +42,13 @@
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}
-                                                /products/add-to-cart?id=${product.id}">ADD</a>
+                                                /shopping-cart/products/add?id=${product.id}">ADD</a>
                                     </td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                    <a href="${pageContext.request.contextPath}/cart/show">
+                    <a href="${pageContext.request.contextPath}/shopping-cart/info">
                             <button type="button" class="btn btn-dark">Show my cart</button></a>
                 </div>
             </div>

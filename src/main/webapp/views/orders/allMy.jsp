@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <title>All orders | MyShop</title>
+        <title>My orders | MyShop</title>
         <style>
             body {
                 background: url("https://i.imgur.com/1WRx5BD.png") no-repeat;
@@ -34,7 +34,7 @@
                                     </th>
                                     <td>
                                         <a href="${pageContext.request.contextPath}
-                                                            /orders/show?id=${order.id}">SHOW</a>
+                                                            /order/info?id=${order.id}">SHOW</a>
                                     </td>
                                 </tr>
                             </c:forEach>
