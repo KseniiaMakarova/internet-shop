@@ -25,9 +25,9 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User create(User element) {
-        String insertUserQuery = "INSERT INTO users (name, login, password, salt) "
-                + "VALUES (?, ?, ?, ?);";
         try (Connection connection = ConnectionUtil.getConnection()) {
+            String insertUserQuery = "INSERT INTO users (name, login, password, salt) "
+                    + "VALUES (?, ?, ?, ?);";
             PreparedStatement statement = connection.prepareStatement(insertUserQuery,
                     PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setString(1, element.getName());
@@ -68,11 +68,11 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public List<User> getAll() {
-        String selectAllUsersQuery = "SELECT * FROM users;";
-        List<User> allUsers = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
+            String selectAllUsersQuery = "SELECT * FROM users;";
             PreparedStatement statement = connection.prepareStatement(selectAllUsersQuery);
             ResultSet resultSet = statement.executeQuery();
+            List<User> allUsers = new ArrayList<>();
             while (resultSet.next()) {
                 User user = getUserFromResultSet(resultSet);
                 user.setRoles(getRolesFromUserId(user.getId(), connection));
@@ -86,9 +86,9 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public User update(User element) {
-        String updateUserQuery = "UPDATE users SET name = ?, login = ?, password = ?, salt = ? "
-                + "WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
+            String updateUserQuery = "UPDATE users SET name = ?, login = ?, password = ?, salt = ? "
+                    + "WHERE user_id = ?;";
             PreparedStatement statement = connection.prepareStatement(updateUserQuery);
             statement.setString(1, element.getName());
             statement.setString(2, element.getLogin());
@@ -107,8 +107,8 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public boolean delete(Long id) {
-        String deleteUserQuery = "DELETE FROM users WHERE user_id = ?;";
         try (Connection connection = ConnectionUtil.getConnection()) {
+            String deleteUserQuery = "DELETE FROM users WHERE user_id = ?;";
             deleteUserFromUsersRoles(id, connection);
             PreparedStatement statement = connection.prepareStatement(deleteUserQuery);
             statement.setLong(1, id);
