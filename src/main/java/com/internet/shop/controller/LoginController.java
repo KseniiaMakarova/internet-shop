@@ -31,8 +31,8 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String login = req.getParameter("login");
-        String password = req.getParameter("psw");
         try {
+            String password = req.getParameter("psw");
             User user = authenticationService.login(login, password);
             HttpSession httpSession = req.getSession();
             httpSession.setAttribute("userId", user.getId());

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/cart/show")
+@WebServlet("/shopping-cart/info")
 public class ShowShoppingCartController extends HttpServlet {
     private static final String USER_ID = "userId";
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
@@ -24,6 +24,6 @@ public class ShowShoppingCartController extends HttpServlet {
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
         List<Product> products = shoppingCartService.getByUserId(userId).getProducts();
         req.setAttribute("products", products);
-        req.getRequestDispatcher("/views/cart/show.jsp").forward(req, resp);
+        req.getRequestDispatcher("/views/cart/info.jsp").forward(req, resp);
     }
 }

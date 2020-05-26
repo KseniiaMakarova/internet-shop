@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/inject-admin")
-public class InjectAdminUserController extends HttpServlet {
+@WebServlet("/inject")
+public class InjectAdminController extends HttpServlet {
     private static final Injector INJECTOR = Injector.getInstance("com.internet.shop");
     private final UserService userService =
             (UserService) INJECTOR.getInstance(UserService.class);

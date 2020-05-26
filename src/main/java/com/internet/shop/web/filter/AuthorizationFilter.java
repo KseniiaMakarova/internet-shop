@@ -29,17 +29,17 @@ public class AuthorizationFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        protectedUrls.put("/products/all", List.of(Role.RoleName.USER));
-        protectedUrls.put("/products/add-to-cart", List.of(Role.RoleName.USER));
-        protectedUrls.put("/products/remove-from-cart", List.of(Role.RoleName.USER));
-        protectedUrls.put("/cart/show", List.of(Role.RoleName.USER));
-        protectedUrls.put("/orders/complete", List.of(Role.RoleName.USER));
-        protectedUrls.put("/orders/all-my", List.of(Role.RoleName.USER));
-        protectedUrls.put("/users/all", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/products", List.of(Role.RoleName.USER));
+        protectedUrls.put("/shopping-cart/products/add", List.of(Role.RoleName.USER));
+        protectedUrls.put("/shopping-cart/products/remove", List.of(Role.RoleName.USER));
+        protectedUrls.put("/shopping-cart/info", List.of(Role.RoleName.USER));
+        protectedUrls.put("/order/complete", List.of(Role.RoleName.USER));
+        protectedUrls.put("/orders", List.of(Role.RoleName.USER));
+        protectedUrls.put("/users", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/users/delete", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/products/manage", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/products/delete", List.of(Role.RoleName.ADMIN));
-        protectedUrls.put("/orders/all-particular-user", List.of(Role.RoleName.ADMIN));
+        protectedUrls.put("/user/orders", List.of(Role.RoleName.ADMIN));
         protectedUrls.put("/orders/delete", List.of(Role.RoleName.ADMIN));
     }
 

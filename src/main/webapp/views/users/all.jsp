@@ -43,7 +43,7 @@
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}
-                                                /orders/all-particular-user?id=${user.id}">SHOW ORDERS</a>
+                                                /user/orders?id=${user.id}">SHOW ORDERS</a>
                                     </td>
                                     <td>
                                         <a href="${pageContext.request.contextPath}
