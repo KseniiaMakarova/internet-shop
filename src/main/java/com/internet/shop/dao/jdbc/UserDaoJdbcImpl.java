@@ -123,9 +123,9 @@ public class UserDaoJdbcImpl implements UserDao {
     private void insertUsersRoles(User user, Connection connection) throws SQLException {
         String selectRoleIdQuery = "SELECT role_id FROM roles WHERE role_name = ?";
         String insertUsersRolesQuery = "INSERT INTO users_roles (user_id, role_id) VALUES (?, ?);";
+        PreparedStatement selectStatement =
+                connection.prepareStatement(selectRoleIdQuery);
         for (Role role : user.getRoles()) {
-            PreparedStatement selectStatement =
-                    connection.prepareStatement(selectRoleIdQuery);
             selectStatement.setString(1, role.getRoleName().name());
             ResultSet resultSet = selectStatement.executeQuery();
             resultSet.next();
