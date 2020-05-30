@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
     <head>
         <meta charset="utf-8">
@@ -20,6 +21,7 @@
                 <div class="col-8" style="text-align: center">
                     <h3>Your orders:</h3>
                     <table class="table table-bordered table-hover">
+                        <caption>Your orders info</caption>
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>

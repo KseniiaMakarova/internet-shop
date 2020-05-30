@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,8 +39,8 @@ public class LoginController extends HttpServlet {
             httpSession.setAttribute("userId", user.getId());
             resp.sendRedirect(req.getContextPath() + "/");
         } catch (AuthenticationException exception) {
-            LOGGER.warn("Authentication failed for user " + login
-                    + " - " + exception.getMessage());
+            LOGGER.log(Level.WARN, "Authentication failed for user {} - {}",
+                    login, exception.getMessage());
             req.setAttribute("message", exception.getMessage());
             req.getRequestDispatcher("/views/login.jsp").forward(req, resp);
         }

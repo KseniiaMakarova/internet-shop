@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,14 +29,14 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(insertShoppingCartQuery,
-                        PreparedStatement.RETURN_GENERATED_KEYS)) {
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setLong(1, element.getUserId());
             statement.executeUpdate();
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 element.setId(resultSet.getLong(1));
                 insertCartsProducts(element, connection);
-                LOGGER.info(element + " was created.");
+                LOGGER.log(Level.INFO, "{} was created", element);
                 return element;
             }
         } catch (SQLException e) {
@@ -95,7 +96,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             statement.executeUpdate();
             deleteShoppingCartFromCartsProducts(element.getId(), connection);
             insertCartsProducts(element, connection);
-            LOGGER.info(element + " was updated.");
+            LOGGER.log(Level.INFO, "{} was updated", element);
             return element;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to update " + element, e);
@@ -111,7 +112,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             deleteShoppingCartFromCartsProducts(id, connection);
             statement.setLong(1, id);
             int numberOfRowsDeleted = statement.executeUpdate();
-            LOGGER.info("A cart with id " + id + " was deleted.");
+            LOGGER.log(Level.INFO, "A cart with id {} was deleted", id);
             return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to delete cart with ID " + id, e);

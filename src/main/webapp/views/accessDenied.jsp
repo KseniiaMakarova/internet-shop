@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
     <head>
         <meta charset="utf-8">

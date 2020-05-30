@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,7 +31,7 @@ public class UserDaoJdbcImpl implements UserDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(insertUserQuery,
-                        PreparedStatement.RETURN_GENERATED_KEYS)) {
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, element.getName());
             statement.setString(2, element.getLogin());
             statement.setString(3, element.getPassword());
@@ -40,7 +41,7 @@ public class UserDaoJdbcImpl implements UserDao {
                 resultSet.next();
                 element.setId(resultSet.getLong(1));
                 insertUsersRoles(element, connection);
-                LOGGER.info(element + " was created.");
+                LOGGER.log(Level.INFO, "{} was created", element);
                 return element;
             }
         } catch (SQLException e) {
@@ -50,9 +51,19 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
-        try {
-            return getUserByParameter(
-                    "SELECT * FROM users WHERE login = ", "'" + login + "'");
+        String selectUserQuery = "SELECT * FROM users WHERE login = ?;";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement
+                        = connection.prepareStatement(selectUserQuery)) {
+            statement.setString(1, login);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    User user = getUserFromResultSet(resultSet);
+                    user.setRoles(getRolesFromUserId(user.getId(), connection));
+                    return Optional.of(user);
+                }
+                return Optional.empty();
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to get user with login " + login, e);
         }
@@ -60,9 +71,19 @@ public class UserDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> get(Long id) {
-        try {
-            return getUserByParameter(
-                    "SELECT * FROM users WHERE user_id = ", String.valueOf(id));
+        String selectUserQuery = "SELECT * FROM users WHERE user_id = ?;";
+        try (Connection connection = ConnectionUtil.getConnection();
+                PreparedStatement statement
+                        = connection.prepareStatement(selectUserQuery)) {
+            statement.setLong(1, id);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    User user = getUserFromResultSet(resultSet);
+                    user.setRoles(getRolesFromUserId(user.getId(), connection));
+                    return Optional.of(user);
+                }
+                return Optional.empty();
+            }
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to get user with ID " + id, e);
         }
@@ -102,7 +123,7 @@ public class UserDaoJdbcImpl implements UserDao {
             statement.executeUpdate();
             deleteUserFromUsersRoles(element.getId(), connection);
             insertUsersRoles(element, connection);
-            LOGGER.info(element + " was updated.");
+            LOGGER.log(Level.INFO, "{} was updated", element);
             return element;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to update " + element, e);
@@ -118,7 +139,7 @@ public class UserDaoJdbcImpl implements UserDao {
             deleteUserFromUsersRoles(id, connection);
             statement.setLong(1, id);
             int numberOfRowsDeleted = statement.executeUpdate();
-            LOGGER.info("A user with id " + id + " was deleted.");
+            LOGGER.log(Level.INFO, "A user with id {} was deleted", id);
             return numberOfRowsDeleted != 0;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to delete user with ID " + id, e);
@@ -141,20 +162,6 @@ public class UserDaoJdbcImpl implements UserDao {
                     insertStatement.executeUpdate();
                 }
             }
-        }
-    }
-
-    private Optional<User> getUserByParameter(String query, String parameter)
-            throws SQLException {
-        try (Connection connection = ConnectionUtil.getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query + parameter + ";")) {
-            if (resultSet.next()) {
-                User user = getUserFromResultSet(resultSet);
-                user.setRoles(getRolesFromUserId(user.getId(), connection));
-                return Optional.of(user);
-            }
-            return Optional.empty();
         }
     }
 

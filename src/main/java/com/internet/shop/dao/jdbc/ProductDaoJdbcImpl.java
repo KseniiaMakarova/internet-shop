@@ -10,9 +10,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +29,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         try (Connection connection = ConnectionUtil.getConnection();
                 PreparedStatement statement
                         = connection.prepareStatement(insertProductQuery,
-                        PreparedStatement.RETURN_GENERATED_KEYS)) {
+                        Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, element.getName());
             statement.setBigDecimal(2, element.getPrice());
             statement.setBoolean(3, element.isAvailable());
@@ -35,7 +37,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             try (ResultSet resultSet = statement.getGeneratedKeys()) {
                 resultSet.next();
                 element.setId(resultSet.getLong(1));
-                LOGGER.info(element + " was created.");
+                LOGGER.log(Level.INFO, "{} was created", element);
                 return element;
             }
         } catch (SQLException e) {
@@ -94,7 +96,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setBoolean(3, element.isAvailable());
             statement.setLong(4, element.getId());
             statement.executeUpdate();
-            LOGGER.info(element + " was updated.");
+            LOGGER.log(Level.INFO, "{} was updated", element);
             return element;
         } catch (SQLException e) {
             throw new DataProcessingException("Unable to update " + element, e);
@@ -111,7 +113,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setBoolean(1, false);
             statement.setLong(2, id);
             int numberOfRowsAffected = statement.executeUpdate();
-            LOGGER.info("A product with id " + id + " was marked as unavailable.");
+            LOGGER.log(Level.INFO, "A product with id {} was marked as unavailable", id);
             deleteProductFromCarts(id, connection);
             return numberOfRowsAffected != 0;
         } catch (SQLException e) {
@@ -137,8 +139,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
                      = connection.prepareStatement(deleteProductQuery)) {
             statement.setLong(1, productId);
             statement.executeUpdate();
-            LOGGER.info("A product with id " + productId
-                    + " was deleted from all shopping carts.");
+            LOGGER.log(Level.INFO,
+                    "A product with id {} was deleted from all shopping carts", productId);
         }
     }
 }

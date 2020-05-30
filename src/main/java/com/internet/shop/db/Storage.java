@@ -17,6 +17,10 @@ public class Storage {
     private static Long orderId = 0L;
     private static Long userId = 0L;
 
+    private Storage() {
+
+    }
+
     public static void addToList(Product product) {
         product.setId(++productId);
         products.add(product);

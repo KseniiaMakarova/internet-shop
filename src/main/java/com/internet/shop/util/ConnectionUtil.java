@@ -14,15 +14,19 @@ public class ConnectionUtil {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
-            throw new RuntimeException("Can not find MySQL Driver", e);
+            throw new IllegalStateException("Can not find MySQL Driver", e);
         }
+    }
+
+    private ConnectionUtil() {
+
     }
 
     public static Connection getConnection() {
         try {
             return DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
-            throw new RuntimeException("Can not establish connection to DB", e);
+            throw new IllegalStateException("Can not establish connection to DB", e);
         }
     }
 }

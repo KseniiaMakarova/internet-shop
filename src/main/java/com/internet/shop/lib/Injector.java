@@ -20,7 +20,7 @@ public class Injector {
         try {
             classes.addAll(getClasses(mainPackageName));
         } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException("Can't get information about all classes", e);
+            throw new IllegalStateException("Can't get information about all classes", e);
         }
     }
 
@@ -47,8 +47,8 @@ public class Injector {
                 newInstanceOfClass = getNewInstance(clazz);
                 setValueToField(field, newInstanceOfClass, classToInject);
             } else {
-                throw new RuntimeException("Class " + field.getName() + " in class "
-                        + clazz.getName() + " hasn't annotation Inject");
+                throw new IllegalStateException("Field " + field.getName() + " in class "
+                        + clazz.getName() + " does not have an Inject annotation");
             }
         }
         if (newInstanceOfClass == null) {
@@ -69,7 +69,7 @@ public class Injector {
                 }
             }
         }
-        throw new RuntimeException("Can't find class which implements "
+        throw new IllegalStateException("Can't find class which implements "
                 + certainInterface.getName()
                 + " interface and has valid annotation (Dao or Service)");
     }
@@ -88,7 +88,7 @@ public class Injector {
         try {
             return field.get(instance) != null;
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("Can't get access to field");
+            throw new IllegalStateException("Can't get access to field");
         }
     }
 
@@ -98,7 +98,7 @@ public class Injector {
             Constructor<?> classConstructor = clazz.getConstructor();
             newInstance = classConstructor.newInstance();
         } catch (Exception e) {
-            throw new RuntimeException("Can't create object of the class", e);
+            throw new IllegalStateException("Can't create object of the class", e);
         }
         return newInstance;
     }
@@ -108,7 +108,7 @@ public class Injector {
             field.setAccessible(true);
             field.set(instanceOfClass, classToInject);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("Can't set value to field ", e);
+            throw new IllegalStateException("Can't set value to field ", e);
         }
     }
 
@@ -125,7 +125,7 @@ public class Injector {
             throws IOException, ClassNotFoundException {
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         if (classLoader == null) {
-            throw new RuntimeException("Class loader is null");
+            throw new IllegalStateException("Class loader is null");
         }
         String path = packageName.replace('.', '/');
         Enumeration<URL> resources = classLoader.getResources(path);
@@ -160,7 +160,7 @@ public class Injector {
             for (File file : files) {
                 if (file.isDirectory()) {
                     if (file.getName().contains(".")) {
-                        throw new RuntimeException("File name shouldn't consist point.");
+                        throw new IllegalArgumentException("File name shouldn't consist point");
                     }
                     classes.addAll(findClasses(file, packageName + "."
                             + file.getName()));
