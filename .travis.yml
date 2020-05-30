@@ -11,8 +11,7 @@ cache:
 addons:
   sonarcloud:
     organization: "kseniia-makarova"
-    token:
-      secure: "NuaD1+IwEmT6anTI/VVv8Y4QAAA2A5j1GTdJzNE1IbveCkzvTQ1/96nUnvVsDE9cMOsYaMUSllp3gm4mOYqE/bUzA9mV/QTT4ZAvcMgg694DUiCphWAcKAg/tAqXraSb542lofGa7BmHT
+    token: "NuaD1+IwEmT6anTI/VVv8Y4QAAA2A5j1GTdJzNE1IbveCkzvTQ1/96nUnvVsDE9cMOsYaMUSllp3gm4mOYqE/bUzA9mV/QTT4ZAvcMgg694DUiCphWAcKAg/tAqXraSb542lofGa7BmHT
       6tse8gteNxGgZatBW6nIkwjoBE42vH4rw+fSiwMysYG6Ytyr218k9cp3UF5/Vs0PpOQQXeRMEln1j7R30+c8av2i64YkXbMKqf8URX+rPmxudPOdhBZW/ZyIDn96GXXC4ry/6W2dHjEDGQdbKvtmcmDd
       DL2ZZztpwpg0NRgr1/HltWxCUfqIUiJp+chmysKU/A85szjXQwy3yIz2hlemFGI1a1eoBqzm0h4I6lOgfD7xZqbkKVxgEz2wi1zvq/+kr68K3/6Dd6fG8i6UXNkyKKMV2PnESEDZxg5NDDTycMk8q10g
       tylTmwUsKpjOYbpWjQpw4NkvQOFle81TMFJh72nq0TLoei3bt+QeCnjjL+RjSLcvdzCtGfsbGvqqxirtfqA1lccUtgkx3fnH4zk8NJ9GK72kJbvywoehAZlhGs0W/6Z/ofjNL5mAzFvIY8fe1tbCp76O
