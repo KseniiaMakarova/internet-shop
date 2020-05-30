@@ -12,8 +12,8 @@ addons:
   sonarcloud:
     organization: "kseniia-makarova"
     token:
-      secure: "9qVWpLH74DkG4UVsZr0hwOt5yAI3+31aUvLU728wHNuOZ17wSpTRvGBUxTzjmQjyTW5COOzsYd6btE5vG5j92ScdH5hu//2mlKxIb2g8UZpucYhlN3L469efVS1+8YcxWxQxOFzAUTTzC
-    sns2x3dVzZp2LnLDlodYwovYtV+ksajVJXmsCEWox/c6nIcr4SpoA3eA2WbGlMA2MBIez2+NLCGiA3WqqWhCcAw0EnWInHE+f8HvBpFdCTOI1NsGlAWcK0vjQunFTSI7R3ejFFq1sdb3UepafeKfbB2e
-    QaqFVHhV00PIdpYiP3w+jxptey4CPSSUHjkvASGDQYnnBa8CBZ3nuD79TVjthzTBL4XOh5XShwnEYpEVWaqn8RnABcisEcuMiZtG+j/6eORdvrfOI57Sbd8rXgXmYnyt77sEumVwNrPS+8jidVUuXbca
-    fGcs1j2aeZlh2vk7jHko1bSqj+lEuDYjxGanOF9aPWc6x84y7t0wF8XfUE9e4fb6A5EfEKh5x1vMDmVQaFKnaEjfAzWVhP7HD1sXbmI1+7otzxFL8HsvQbVgUtanz8tUJ889xH3gOUl1+Xq2wmqnspB3
-    dRo0zBuTZjeQ7soiAw7VJp3uX6Jtd+AaaykxDZtwo544mV3v7Vcs7qPzuzwlUPtEM9bSoBsTaNPcPQTjr0objM="
+      secure: "gP4H99hsW2mg67Vh06uLMp8oxr6u/5ZX6lhaOkEaPzyUFaRo2fZ322wkjR+dlyLzoKspcIrLmo/2smxG0mRneJgg3sI61dU+PW0B6V8b2G5wgqoV26B7Q+o8wye3bWRZAR6ZhSH8Eke+w
+    Gj5D4X/r2xFm8jdpiVOv/v65B3MiX+N3mqO+E7fBW97GoOEvqKdS4Cnp0vomkSZSmFlheAsFkDf/tjoyaZbdyki7u3mrxYL9egIZSSuQ2XaJAJyurdAuY8AJoNv+BjXXiTROiN3BZfhCMh1PKwzsWMTO
+    dSOc8/oY+OoHRxaEfQSeVBTXdkZL33KXSpGFbjs4PXmeFr0PkrP3evkK9a2Rs8MzQSlysHATdh9ujsST3cDj6Hy1crDMBSe2EoxG9SghEvHaU9ImJfavfRt/4PBJdW3GljovQERmaeipFHpokcR0JyaC
+    LBen9mGkaroAG/uYDliDY4mvgQ1pWdxUMmtN84iR1I8XB63VXd/5+gFC4G1wFvOvkmogN/7R+bijS+X2xm1VYULXpRF2VQQYpHTbivSZYaHiC1iANiuYC/iWpqyKX6dKEI1ljdJT+lG5nU0JOhJVO7HI
+    R0q8oysTw/0+yyPS6hQjC5FlA8cm5h9rnOIuuRxIb5u7znhpWRzTqhKt1Z1R4eT+F00i2e/s/mcw4/gALmNpVU="
