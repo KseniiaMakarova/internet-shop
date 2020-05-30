@@ -11,8 +11,10 @@ cache:
 addons:
   sonarcloud:
     organization: "kseniia-makarova"
-    token: "NuaD1+IwEmT6anTI/VVv8Y4QAAA2A5j1GTdJzNE1IbveCkzvTQ1/96nUnvVsDE9cMOsYaMUSllp3gm4mOYqE/bUzA9mV/QTT4ZAvcMgg694DUiCphWAcKAg/tAqXraSb542lofGa7BmHT
-      6tse8gteNxGgZatBW6nIkwjoBE42vH4rw+fSiwMysYG6Ytyr218k9cp3UF5/Vs0PpOQQXeRMEln1j7R30+c8av2i64YkXbMKqf8URX+rPmxudPOdhBZW/ZyIDn96GXXC4ry/6W2dHjEDGQdbKvtmcmDd
-      DL2ZZztpwpg0NRgr1/HltWxCUfqIUiJp+chmysKU/A85szjXQwy3yIz2hlemFGI1a1eoBqzm0h4I6lOgfD7xZqbkKVxgEz2wi1zvq/+kr68K3/6Dd6fG8i6UXNkyKKMV2PnESEDZxg5NDDTycMk8q10g
-      tylTmwUsKpjOYbpWjQpw4NkvQOFle81TMFJh72nq0TLoei3bt+QeCnjjL+RjSLcvdzCtGfsbGvqqxirtfqA1lccUtgkx3fnH4zk8NJ9GK72kJbvywoehAZlhGs0W/6Z/ofjNL5mAzFvIY8fe1tbCp76O
-      ukQ9/PTYd52/7lbxLBk3QgHt2Q7G2x2X8Lg6mcsnyQ1dN05OdoQ5sSmvhZ5hp3gOtMvv+tiTsFpDZJC3tqTXI4="
+    token:
+      secure: "nG+Qomgf4dSeKdIbvMsE1R/CfsQTKe5bPrZXN6jX5IJXNm+2y+0tmadUB0w0eXcLlhb/yjIhdKelSwDJ1L6m6aCRXEfHO3tl5jKdb1eKxF6M5EE8b7bPJ++eIvO3iD1SQn5lknlvCAbEh
+        LCpvbwHWKVbQrn+yablQ5VA6VONbvFOjBfAKMBikbWocYe9lsq0p2aI7FY8+MHYKStSu/C8I+BWX4smOoreZBRpYRYNYxqkgr5PMDYVwGApIvxvO/exNcupfIZlUjiC3Zz50q7+pLozaH/EKB5D3i68/
+        UzwU/nc2tlXUD5gveigtUEXWyU3caJJPp7ep/WxIY902SYle6qMX/EaHhNPoFngjGDTkvmia/qoWPV94Rs4yZmfAdcReqhLgPUyJc8yjMTeE2GZKARsIzBPzlIheV746VRrxN4AfmJDnqxvY1jRGdqES
+        CgqkFEdD9mgbGRsDjzzbcaTR+RjBchuG/Z2xrGlrgJQHXGr1LDPu30T0lO6ilQoCMvIuOrS9wiEl6UhmD3qXdqNAHrf/T9UQsP1GfPrnC/uN2pmj2zxlsfXTYj1nZE4p0EUmAePkdkxfOU+PFHZmwyKp
+        Nr9juOzUkqX9EDEZulg2yWI4pw/Db5qVt2Ccg28mF45lYyie+zLDy3OfBo64mVKujFiVPc0jflFQWXjBlXlOEY="
+
