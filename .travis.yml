@@ -1,19 +1,23 @@
 language: java
+sudo: false
+install: true
+
 jdk:
   - openjdk11
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=KseniiaMakarova_internet-shop
+  - mvn clean verify sonar:sonar -Pcoverage
 
 cache:
   directories:
     - $HOME/.m2
+    - $HOME/.sonar/cache
 
 addons:
   sonarcloud:
     organization: "kseniia-makarova"
     token:
-      secure: "gP4H99hsW2mg67Vh06uLMp8oxr6u/5ZX6lhaOkEaPzyUFaRo2fZ322wkjR+dlyLzoKspcIrLmo/2smxG0mRneJgg3sI61dU+PW0B6V8b2G5wgqoV26B7Q+o8wye3bWRZAR6ZhSH8Eke+w
-    Gj5D4X/r2xFm8jdpiVOv/v65B3MiX+N3mqO+E7fBW97GoOEvqKdS4Cnp0vomkSZSmFlheAsFkDf/tjoyaZbdyki7u3mrxYL9egIZSSuQ2XaJAJyurdAuY8AJoNv+BjXXiTROiN3BZfhCMh1PKwzsWMTO
-    dSOc8/oY+OoHRxaEfQSeVBTXdkZL33KXSpGFbjs4PXmeFr0PkrP3evkK9a2Rs8MzQSlysHATdh9ujsST3cDj6Hy1crDMBSe2EoxG9SghEvHaU9ImJfavfRt/4PBJdW3GljovQERmaeipFHpokcR0JyaC
-    LBen9mGkaroAG/uYDliDY4mvgQ1pWdxUMmtN84iR1I8XB63VXd/5+gFC4G1wFvOvkmogN/7R+bijS+X2xm1VYULXpRF2VQQYpHTbivSZYaHiC1iANiuYC/iWpqyKX6dKEI1ljdJT+lG5nU0JOhJVO7HI
-    R0q8oysTw/0+yyPS6hQjC5FlA8cm5h9rnOIuuRxIb5u7znhpWRzTqhKt1Z1R4eT+F00i2e/s/mcw4/gALmNpVU="
+      secure: "R6WpI8M9kwAvgklA8LocG4Fg3O4CwFfCljpN9wsil6WD6IKCuEITGgbg6pagvhfuPIIJd4lQt1bXEYLXT2CvW3zPShL4YKchHxGr1mEdKyyqyDkopZseiKag7QgiEc37gytJkyxPoRLd/
+      k6zpOIaTE4FTo0wpYKxusUlAQoaDBt5cLitSP+GIWQ10Qsk2jKGR+ialacVUU73aTqC/S/vl+pWRK1MAhrWL+3ojuErhtCXU5y8/ys6qm7/YLIHousv/7K4JjU2lmHpcvGWAtX+ZPkvwEm3uZhffVCt6
+      g4BarOPu5qU4D0JlsKxVkYdBJpF7RGF8/18BRFK2jX51jinJZuxQ3ZS1SyhxaB4xzgHOekqdr35udPEesicH4yqZbAwFDB6ULAnY87G7UkppwbEDNVASa+kugyaI5V4iYn1aHrP0IGe6K99D+tKl8uhy
+      SoviMEOgi/gfniQxRRONoJsBKqPVhOYNULVPZkGiPR75zfGKAGaue6zrL3RnH+Ja/E9HMkCkFAgOLxly7xcnc/6aQlQ9TsJdPu+Foi5P0kO/X8FgYY7LO6GgdjPrm+WPhVybXT5COAOvdfaL/EJnLUd2
+      CLU4j5xDK5hY6CmhUhxo0UJWFvn2SS4zNxVkAtCqQnvEEHVdV9zK2TbXo9YiJ9pJUKDF6+LXLoi35qeTsXo+6U="
