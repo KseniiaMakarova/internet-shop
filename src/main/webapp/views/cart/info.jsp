@@ -19,9 +19,9 @@
         <div class="container h-50">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10" style="text-align: center">
-                    <h3>Your shopping cart:</h3>
+                    <h3 id="shopping-cart-info">Your shopping cart:</h3>
                     <p></p>
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" aria-describedby="shopping-cart-info">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>

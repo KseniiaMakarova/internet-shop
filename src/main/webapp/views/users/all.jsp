@@ -19,9 +19,9 @@
         <div class="container h-50">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10" style="text-align: center">
-                    <h3>All users:</h3>
+                    <h3 id="all-users">All users:</h3>
                     <p></p>
-                    <table class="table table-bordered table-hover">
+                    <table class="table table-bordered table-hover" aria-describedby="all-users">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
