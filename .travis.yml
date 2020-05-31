@@ -1,14 +1,11 @@
 language: java
-
 jdk:
   - openjdk11
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=KseniiaMakarova_internet-shop -Dsonar.organization=kseniia-makarova -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=60a899a3971c5114efd5738080c9b09cb54140b9
-
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
 cache:
   directories:
     - $HOME/.m2
-
 addons:
   sonarcloud:
     organization: "kseniia-makarova"
