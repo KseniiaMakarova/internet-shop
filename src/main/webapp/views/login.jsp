@@ -29,6 +29,7 @@
                         </div>
                     </c:if>
                     <h4>Please enter your email and password to log in:</h4>
+                    <p></p>
                     <div class="form-group">
                         <label for="InputEmail">Email address:</label>
                         <input type="email" name="login" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>

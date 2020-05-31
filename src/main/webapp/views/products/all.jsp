@@ -20,8 +20,8 @@
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10" style="text-align: center">
                     <h3>All products:</h3>
+                    <p></p>
                     <table class="table table-bordered table-hover">
-                        <caption>Products info</caption>
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>

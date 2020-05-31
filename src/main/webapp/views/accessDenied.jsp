@@ -19,6 +19,7 @@
             <div class="row h-100 justify-content-center align-items-center">
                 <form style="text-align: center">
                     <h3>We are sorry, the access is not allowed.</h3>
+                    <p></p>
                     <a href="${pageContext.request.contextPath}/">
                         <button type="button" class="btn btn-dark">Return to main page</button></a>
                 </form>

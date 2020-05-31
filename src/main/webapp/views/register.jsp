@@ -29,6 +29,7 @@
                         </div>
                     </c:if>
                     <h4>Please provide account information:</h4>
+                    <p></p>
                     <div class="form-group">
                         <label for="InputName">Full name:</label>
                         <input type="text" name="name" class="form-control" id="InputName" required>

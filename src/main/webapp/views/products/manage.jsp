@@ -20,8 +20,8 @@
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-10" style="text-align: center">
                     <h3>All products:</h3>
+                    <p></p>
                     <table class="table table-bordered table-hover">
-                        <caption>Products info</caption>
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -52,15 +52,14 @@
                     </table>
                     <form method="post" action="${pageContext.request.contextPath}/products/manage" class="needs-validation" novalidate>
                         <h4>To add a new product, please provide the following:</h4>
+                        <p></p>
                         <div class="form-row">
                             <div class="col-5">
-                                <label for="Name"></label>
-                                <input type="text" name="name" class="form-control" id="Name" placeholder="Name" required>
+                                <input type="text" name="name" class="form-control" placeholder="Name" required>
                                 <div class="invalid-feedback">Please enter product name.</div>
                             </div>
                             <div class="col-5">
-                                <label for="Price"></label>
-                                <input type="number" min="1" name="price" class="form-control" id="Price" placeholder="Price" required>
+                                <input type="number" min="1" name="price" class="form-control" placeholder="Price" required>
                                 <div class="invalid-feedback">Please enter product price.</div>
                             </div>
                             <div class="col-2">
