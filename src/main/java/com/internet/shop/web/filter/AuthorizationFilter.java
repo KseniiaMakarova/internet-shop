@@ -54,7 +54,7 @@ public class AuthorizationFilter implements Filter {
                 || isUserAuthorized(userService.get(userId), protectedUrls.get(servletPath))) {
             filterChain.doFilter(req, resp);
         } else {
-            LOGGER.warn("User with ID " + userId + " tried to access a secure resource.");
+            LOGGER.warn("User with ID {} tried to access a secure resource", userId);
             req.getRequestDispatcher("/views/accessDenied.jsp").forward(req, resp);
         }
     }

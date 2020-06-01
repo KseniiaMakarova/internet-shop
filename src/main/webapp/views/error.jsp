@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
 <head>
     <meta charset="utf-8">
@@ -19,6 +19,7 @@
     <div class="row h-100 justify-content-center align-items-center">
         <form style="text-align: center">
             <h3>Oops! Something went wrong!</h3>
+            <p></p>
             <a href="${pageContext.request.contextPath}/">
                 <button type="button" class="btn btn-dark">Return to main page</button></a>
         </form>

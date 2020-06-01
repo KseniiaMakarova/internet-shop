@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
     <head>
         <meta charset="utf-8">
@@ -29,6 +29,7 @@
                         </div>
                     </c:if>
                     <h4>Please enter your email and password to log in:</h4>
+                    <p></p>
                     <div class="form-group">
                         <label for="InputEmail">Email address:</label>
                         <input type="email" name="login" class="form-control" id="InputEmail" aria-describedby="emailHelp" required>

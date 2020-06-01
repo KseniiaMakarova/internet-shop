@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -33,8 +34,9 @@ public class ShowOrderController extends HttpServlet {
             req.setAttribute("order", order);
             req.getRequestDispatcher("/views/orders/info.jsp").forward(req, resp);
         } else {
-            LOGGER.warn("User with ID "
-                    + viewingUserId + " tried to get access to another user's order");
+            LOGGER.log(Level.WARN,
+                    "User with ID {} tried to get access to the order of another user",
+                    viewingUserId);
             req.getRequestDispatcher("/views/accessDenied.jsp").forward(req, resp);
         }
     }

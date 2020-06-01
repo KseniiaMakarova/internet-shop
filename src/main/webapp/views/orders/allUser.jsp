@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<!DOCTYPE html>
 <html lang="en" class="h-100">
     <head>
         <meta charset="utf-8">
@@ -18,8 +19,9 @@
         <div class="container h-50">
             <div class="row h-100 justify-content-center align-items-center">
                 <div class="col-8" style="text-align: center">
-                    <h3>All user orders:</h3>
-                    <table class="table table-bordered table-hover">
+                    <h3 id="all-user-orders">All user orders:</h3>
+                    <p></p>
+                    <table class="table table-bordered table-hover" aria-describedby="all-user-orders">
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
